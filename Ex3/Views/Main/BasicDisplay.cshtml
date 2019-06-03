@@ -1,0 +1,109 @@
+﻿
+<canvas id="displayCanvas"></canvas>
+
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<script>
+
+    // adjust the longitude values between -180 to 180
+    adjustLon = function (lon) {
+
+        var windowWidth = window.innerWidth;
+
+        if (lon < 0) {
+            return (windowWidth / 2) * (1 - Math.abs(lon) / 180);
+        } else {
+            return (windowWidth / 2) * (1 + Math.abs(lon) / 180);
+        }
+    }
+
+    // adjust the latitude values between -90 to 90
+    adjustLat = function (lat) {
+
+        var windowHeight = window.innerHeight;
+
+        if (lat < 0) {
+            return (windowHeight / 2) * (1 + Math.abs(lat) / 90);
+        } else {
+            return (windowHeight / 2) * (1 - Math.abs(lat) / 90);
+        }
+    }
+
+    drawPoint = function (ctx, x, y) {
+        console.warn("wow");
+        //draw point
+        ctx.beginPath();
+        ctx.strokeStyle = "black";
+        ctx.arc(x, y, 5, 0, Math.PI * 2);
+        ctx.stroke();
+        //draw inner point
+        ctx.arc(x, y, 2, 0, Math.PI * 2);
+        ctx.fillStyle = "red";
+        ctx.fill();
+    }
+
+    drawStaticMap = function () {
+
+        //draw the map
+
+        var windowWidth = window.innerWidth;
+        var windowHeight = window.innerHeight;
+
+        var canvas = document.getElementById("displayCanvas"),
+            ctx = canvas.getContext("2d");
+
+        canvas.width = windowWidth;
+        canvas.height = windowHeight;
+
+
+        var background = new Image();
+        background.src = "/Image/export-map-share.png";
+
+        background.onload = function () {
+
+            ctx.drawImage(background, 0, 0, background.width, background.height,     // source rectangle
+                0, 0, canvas.width, canvas.height); // destination rectangle
+
+            $.get("/Main/GetSimulatorData", function (data) {
+
+                console.info(data);
+
+                if (data.lon != null && data.lat != null) {
+
+                    lon = adjustLon(data.lon);
+                    lat = adjustLat(data.lat);
+
+                    drawPoint(ctx, lon, lat);
+
+                    //temp, can delete
+                    //drawPoint(ctx, data.lon, data.lat);
+
+                }
+
+            });
+
+
+        }
+
+    }
+
+    drawStaticMap();
+
+
+
+        @*var myCanvas = document.getElementById("displayCanvas");
+        myCanvas.height = window.innerHeight;
+        myCanvas.width = window.innerWidth;
+        var interTime = @Session["timePerSecond"] * 1000;
+        var Lon = (@Session["Lon"]+180) * myCanvas.height / 360;
+        var Lat = (@Session["Lat"]+90) * myCanvas.width / 180;
+
+        var image = document.getElementById("world");
+        var context = myCanvas.getContext("2d");
+        //creating the red dot
+        context.fillStyle = "red";
+        context.strokeStyle = "red";
+        context.lineWidth = "5";*@
+
+
+
+</script>
