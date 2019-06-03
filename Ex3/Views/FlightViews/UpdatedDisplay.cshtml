@@ -1,0 +1,37 @@
+﻿
+@{
+    ViewBag.Title = "UpdatedDisplay";
+}
+
+<script src="http://www.w3.org/1999/xhtml"></script>
+<canvas id="displayCanvas" style="height:100%; width:100%"></canvas>/>
+
+<body>
+    
+    <script>
+        var myCanvas = document.getElementById("displayCanvas");
+        myCanvas.height = window.innerHeight;
+        myCanvas.width = window.innerWidth;
+
+        var Lat, Lon, x, y;
+        var context = myCanvas.getContext("2d");
+
+        Timer = (function () {
+            $.post("@Url.Action("GetData")").done(function (xml) {
+                var 
+            })
+        }
+
+
+        //creating the red dot
+        context.fillStyle = "red";
+        context.strokeStyle = "red";
+        context.lineWidth = "5";
+
+
+
+    </script>
+
+</body>
+
+

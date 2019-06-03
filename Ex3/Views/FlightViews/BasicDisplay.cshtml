@@ -1,0 +1,40 @@
+﻿
+@{
+    ViewBag.Title = "BasicDisplay";
+}
+<!DOCTYPE html>
+<script src="http://www.w3.org/1999/xhtml"></script>
+
+<html>
+<head>
+</head>
+
+<body background="C:\Users\WIN10\source\repos\Ex3\Ex3\Image\export-map-share.png" style="background-size:cover">
+
+    <canvas id="displayCanvas" style="height:100%; width:100%">
+
+    </canvas>
+
+    <script>
+        var myCanvas = document.getElementById("displayCanvas");
+        myCanvas.height = window.innerHeight;
+        myCanvas.width = window.innerWidth;
+        var interTime = @Session["timePerSecond"] * 1000;
+        var Lon = (@Session["Lon"]+180) * myCanvas.height / 360;
+        var Lat = (@Session["Lat"]+90) * myCanvas.width / 180;
+
+        var image = document.getElementById("world");
+        var context = myCanvas.getContext("2d");
+        //creating the red dot
+        context.fillStyle = "red";
+        context.strokeStyle = "red";
+        context.lineWidth = "5";
+
+
+
+    </script>
+
+</body>
+</html>
+
+
