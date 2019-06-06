@@ -1,0 +1,91 @@
+﻿
+<canvas id="displayCanvas"></canvas>
+
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<script>
+
+    // adjust the longitude values between -180 to 180
+    adjustLon = function (lon) {
+
+        var windowWidth = window.innerWidth;
+
+        if (lon < 0) {
+            return (windowWidth / 2) * (1 - Math.abs(lon) / 180);
+        } else {
+            return (windowWidth / 2) * (1 + Math.abs(lon) / 180);
+        }
+    }
+
+    // adjust the latitude values between -90 to 90
+    adjustLat = function (lat) {
+
+        var windowHeight = window.innerHeight;
+
+        if (lat < 0) {
+            return (windowHeight / 2) * (1 + Math.abs(lat) / 90);
+        } else {
+            return (windowHeight / 2) * (1 - Math.abs(lat) / 90);
+        }
+    }
+
+    var previousX, previousY;
+
+    var path = new Array();
+
+    drawPath = function () {
+        $.post("@Url.Action("SaveToFile")").done(function (xml)){
+            var xmlFile = $.parseXML(xml),
+                $xml = $(xmlFile),
+            var Lon = $xml.find("Lon").text();
+            var Lat = $xml.find("Lat").text();
+            var EOF = $xml.find("EOF").text();
+           // need to sent alert when getting to the end of the file => finished reading.
+            if (EOF === "true") {
+                stopDrawing();
+                alert("Finished");
+                return;
+            }
+
+            var canvas = document.getElementById("displayCanvas"),
+            ctx = canvas.getContext("2d");
+
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+
+            var background = new Image();
+            background.src = "/Image/export-map-share.png";
+            xPoint = (parseFloat(Lon) + 180) * (canvas.height / 360);
+            yPoint = (parseFloat(Lat) + 90) * (canvas.width / 180);
+            console.warn("wow");
+            //draw point
+            ctx.beginPath();
+            ctx.strokeStyle = "black";
+            ctx.arc(xPoint, yPoint, 5, 0, Math.PI * 2);
+            ctx.stroke();
+            //draw inner point
+            ctx.arc(xPoint, yPoint, 2, 0, Math.PI * 2);
+            ctx.fillStyle = "red";
+            ctx.fill();
+            //draw line
+            ctx.beginPath();
+            if (typeof previousX == 'undefined') {
+                ctx.moveTo(xPoint, yPoint);
+            }
+            else {
+                ctx.moveTo(previousX, previousY);
+            }
+            ctx.lineTo(xPoint, yPoint);
+            ctx.stroke;
+            previousX = xPoint;
+            previousY = yPoint;
+        };
+    };
+
+    var returnedPath = setInterval(drawPath,@Session["timesPerSec"]* 1000);
+
+    function stopDrawing() {
+        clearInterval(returnedPath);
+    }
+    drawPath();
+
+</script>

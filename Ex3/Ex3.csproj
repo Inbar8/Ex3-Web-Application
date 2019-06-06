@@ -119,6 +119,9 @@
     <Content Include="Views\FlightViews\UpdatedDisplay.cshtml" />
     <Content Include="Views\Main\Index.cshtml" />
     <Content Include="Views\Main\BasicDisplay.cshtml" />
+    <Content Include="Views\Main\AnimatedDisplay.cshtml" />
+    <Content Include="Views\Main\DisplayAndSave.cshtml" />
+    <Content Include="Views\Main\LoadAndDisplay.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

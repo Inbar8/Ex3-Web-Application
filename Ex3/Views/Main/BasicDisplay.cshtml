@@ -4,6 +4,28 @@
 <script src="~/Scripts/jquery-1.10.2.js"></script>
 <script>
 
+    //temp>>>>>
+    var path = new Array();
+    var path = [{ Lat: 0.1, Lon: 0.2, Rudder: 0.5, Throttle: 0.5 }, { Lat: 0.1, Lon: 0.2, Rudder: 0.5, Throttle: 0.5 }];
+
+    saveToFile = function () {
+
+        $.ajax({
+            type: "POST",
+            url: "/Main/SaveToFile",
+            data: {
+                "fileName": "wow", "path": path},
+            dataType: "json",
+            success: function () { alert("Mapping Successful") },
+            failure: function () { alert("not working..."); }
+        });
+
+    }
+
+    saveToFile();
+    //temp<<<<<<
+
+
     // adjust the longitude values between -180 to 180
     adjustLon = function (lon) {
 
@@ -41,28 +63,28 @@
         ctx.fill();
     }
 
-    drawStaticMap = function () {
+    drawMap = function () {
 
         //draw the map
 
-        var windowWidth = window.innerWidth;
-        var windowHeight = window.innerHeight;
-
+      
         var canvas = document.getElementById("displayCanvas"),
             ctx = canvas.getContext("2d");
 
-        canvas.width = windowWidth;
-        canvas.height = windowHeight;
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
 
 
         var background = new Image();
         background.src = "/Image/export-map-share.png";
 
+        //drawing the red dot only after the map has been loaded.
         background.onload = function () {
 
             ctx.drawImage(background, 0, 0, background.width, background.height,     // source rectangle
                 0, 0, canvas.width, canvas.height); // destination rectangle
 
+            //$ is a shortcut of the Jquarry
             $.get("/Main/GetSimulatorData", function (data) {
 
                 console.info(data);
@@ -72,38 +94,20 @@
                     lon = adjustLon(data.lon);
                     lat = adjustLat(data.lat);
 
-                    drawPoint(ctx, lon, lat);
+                    //need to use this line eventually:
+                    //drawPoint(ctx, lon, lat);
 
                     //temp, can delete
-                    //drawPoint(ctx, data.lon, data.lat);
+                    drawPoint(ctx, data.lon, data.lat);
 
                 }
 
             });
 
-
         }
 
     }
 
-    drawStaticMap();
-
-
-
-        @*var myCanvas = document.getElementById("displayCanvas");
-        myCanvas.height = window.innerHeight;
-        myCanvas.width = window.innerWidth;
-        var interTime = @Session["timePerSecond"] * 1000;
-        var Lon = (@Session["Lon"]+180) * myCanvas.height / 360;
-        var Lat = (@Session["Lat"]+90) * myCanvas.width / 180;
-
-        var image = document.getElementById("world");
-        var context = myCanvas.getContext("2d");
-        //creating the red dot
-        context.fillStyle = "red";
-        context.strokeStyle = "red";
-        context.lineWidth = "5";*@
-
-
+    drawMap();
 
 </script>

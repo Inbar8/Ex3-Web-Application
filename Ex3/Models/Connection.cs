@@ -3,7 +3,7 @@ using System.Net.Sockets;
 using System.Net;
 
 // Here is a part of the Network between the application and the simulator
-namespace FlightSimulator.Model
+namespace Ex3.Models
 {
     class Connect
     {
