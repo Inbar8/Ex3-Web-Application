@@ -88,10 +88,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\flightCss.css" />
+    <Content Include="Content\mapCss.css" />
     <Content Include="Content\Site.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Image\export-map-share.png" />
+    <Content Include="Image\flight.jpg" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -101,8 +104,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Connection.cs" />
-    <Compile Include="Models\SavingData.cs" />
+    <Compile Include="Models\Connect.cs" />
+    <Compile Include="Models\Information.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -113,10 +116,6 @@
     <None Include="packages.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Display.cshtml" />
-    <Content Include="Views\FlightViews\BasicDisplay.cshtml" />
-    <Content Include="Views\FlightViews\index.cshtml" />
-    <Content Include="Views\FlightViews\UpdatedDisplay.cshtml" />
     <Content Include="Views\Main\Index.cshtml" />
     <Content Include="Views\Main\BasicDisplay.cshtml" />
     <Content Include="Views\Main\AnimatedDisplay.cshtml" />
@@ -131,8 +130,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Connection\" />
-    <Folder Include="Views\SavingData\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

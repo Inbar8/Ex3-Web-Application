@@ -1,3 +1,11 @@
 ﻿#displayCanvas {
     display: block;
 }
+
+body {
+    padding: 20px 0;
+}
+
+.body-content {
+    padding: 0 15px;
+}

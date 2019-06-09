@@ -19,16 +19,13 @@ namespace Ex3
             routes.MapRoute("BasicDisplay", "display/{ip}/{port}",
             defaults: new { controller = "Main", action = "BasicDisplay"});
 
-
             // / display / 127.0.0.1 / 5400 / 4
             routes.MapRoute("AnimatedDisplay", "display/{ip}/{port}/{time}",
             defaults: new { controller = "Main", action = "AnimatedDisplay" });
 
-
             // / save / 127.0.0.1 / 5400 / 4 / 10 / flight1
             routes.MapRoute("DisplayAndSave", "save/{ip}/{port}/{time}/{seconds}/{file}",
             defaults: new { controller = "Main", action = "DisplayAndSave" });
-
 
             //don't change:
             routes.MapRoute(

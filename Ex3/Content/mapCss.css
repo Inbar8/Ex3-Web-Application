@@ -1,0 +1,12 @@
+﻿body {
+    background-image: url('../image/export-map-share.png');
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+canvas {
+    width: 100%;
+    height: auto;
+}
